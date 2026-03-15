@@ -7,6 +7,7 @@
 * Added --benchmark, to compare performance of each tool [#217](https://github.com/toy/image_optim/issues/217) [#218](https://github.com/toy/image_optim/pull/218) [@gurgeous](https://github.com/gurgeous)
 * Don't require presence of `git` in gemspec [@toy](https://github.com/toy)
 * Add a basic check for names of enabled and disabled svgo plugins [@toy](https://github.com/toy)
+* Add support for enabling/disabling plugins in svgo 2.x, 3.x, 4.x [#191](https://github.com/toy/image_optim/issues/191) [#224](https://github.com/toy/image_optim/pull/224) [@tomhughes](https://github.com/tomhughes)
 
 ## v0.31.4 (2024-11-19)
 
