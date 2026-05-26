@@ -7,14 +7,16 @@ class ImageOptim
   class Worker
     # https://github.com/svg/svgo
     class Svgo < Worker
+      PLUGIN_NAME_R = /\A[a-zA-Z]+\z/
+
       DISABLE_PLUGINS_OPTION =
       option(:disable_plugins, [], 'List of plugins to disable') do |v|
-        Array(v).map(&:to_s)
+        parse_plugin_names(v)
       end
 
       ENABLE_PLUGINS_OPTION =
       option(:enable_plugins, [], 'List of plugins to enable') do |v|
-        Array(v).map(&:to_s)
+        parse_plugin_names(v)
       end
 
       ALLOW_LOSSY_OPTION =
@@ -48,6 +50,18 @@ class ImageOptim
         end
         args.unshift "--precision=#{precision}" if allow_lossy
         execute(:svgo, args, options) && optimized?(src, dst)
+      end
+
+    private
+
+      def parse_plugin_names(v)
+        Array(v).map(&:to_s).select do |name|
+          if name =~ PLUGIN_NAME_R
+            true
+          else
+            warn "Doesn't look like svgo plugin name: #{name}"
+          end
+        end
       end
     end
   end
