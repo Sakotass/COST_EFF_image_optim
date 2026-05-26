@@ -7,7 +7,7 @@ class ImageOptim
   class Worker
     # https://github.com/svg/svgo
     class Svgo < Worker
-      PLUGIN_NAME_R = /\A[a-zA-Z]+\z/
+      PLUGIN_NAME_R = /\A[a-zA-Z]+\z/.freeze
 
       DISABLE_PLUGINS_OPTION =
       option(:disable_plugins, [], 'List of plugins to disable') do |v|
@@ -54,8 +54,8 @@ class ImageOptim
 
     private
 
-      def parse_plugin_names(v)
-        Array(v).map(&:to_s).select do |name|
+      def parse_plugin_names(value)
+        Array(value).map(&:to_s).select do |name|
           if name =~ PLUGIN_NAME_R
             true
           else
